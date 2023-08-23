@@ -1,113 +1,262 @@
-import Image from 'next/image'
+import Image from "next/image";
+import ProductCategory from "@/components/ProductList/ProductCategory";
+import AddressBar from "@/components/AddressBar";
+import SecondaryHeading from "@/components/Heading/SecondaryHeading";
+import CircularHomeCarousel from "@/components/Carousel/CircularHomeCarousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import SaleBanner from "@/components/ProductList/SaleBanner";
+import ProductAutoScroll from "@/components/ProductList/ProductAutoScroll";
+import FavoriteBrandsGrid from "@/components/ProductList/FavoriteBrandsGrid";
+import ProductGrid from "@/components/ProductList/ProductGrid";
+import Footer from "@/components/Footer";
+import Product from "@/components/ProductList/Product";
+
+const products = [
+  {
+    id: 1,
+    name: "Earthen Bottle",
+    href: "#",
+    price: "$48",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
+    imageAlt:
+      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
+  },
+  {
+    id: 2,
+    name: "Nomad Tumbler",
+    href: "#",
+    price: "$35",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
+    imageAlt:
+      "Olive drab green insulated bottle with flared screw lid and flat top.",
+  },
+  {
+    id: 3,
+    name: "Focus Paper Refill",
+    href: "#",
+    price: "$89",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
+    imageAlt:
+      "Person using a pen to cross a task off a productivity paper card.",
+  },
+  {
+    id: 4,
+    name: "Machined Mechanical Pencil",
+    href: "#",
+    price: "$35",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 1,
+    name: "Earthen Bottle",
+    href: "#",
+    price: "$48",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
+    imageAlt:
+      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
+  },
+  {
+    id: 2,
+    name: "Nomad Tumbler",
+    href: "#",
+    price: "$35",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
+    imageAlt:
+      "Olive drab green insulated bottle with flared screw lid and flat top.",
+  },
+  {
+    id: 3,
+    name: "Focus Paper Refill",
+    href: "#",
+    price: "$89",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
+    imageAlt:
+      "Person using a pen to cross a task off a productivity paper card.",
+  },
+  {
+    id: 4,
+    name: "Machined Mechanical Pencil",
+    href: "#",
+    price: "$35",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  {
+    id: 1,
+    name: "Earthen Bottle",
+    href: "#",
+    price: "$48",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
+    imageAlt:
+      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
+  },
+  {
+    id: 2,
+    name: "Nomad Tumbler",
+    href: "#",
+    price: "$35",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
+    imageAlt:
+      "Olive drab green insulated bottle with flared screw lid and flat top.",
+  },
+  {
+    id: 3,
+    name: "Focus Paper Refill",
+    href: "#",
+    price: "$89",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
+    imageAlt:
+      "Person using a pen to cross a task off a productivity paper card.",
+  },
+  {
+    id: 4,
+    name: "Machined Mechanical Pencil",
+    href: "#",
+    price: "$35",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+    imageAlt:
+      "Hand holding black machined steel mechanical pencil with brass tip and top.",
+  },
+  // More products...
+];
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="">
+      <main className=" flex-col items-center justify-between">
+        <div className="text-themePurpleText bg-white border ">
+          <div
+            class="flex items-center justify-between py-2 text-sm container"
+            role="alert"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            <div className="flex items-center w-full justify-end">
+              <span class="sr-only">Info</span>
+              {/* <div>
+            <span class="font-medium">Info alert!</span> Change a few things up
+            and try submitting again.
+          </div> */}
+              <button
+                type="button"
+                className="relative rounded-full p-1 text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              >
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">View notifications</span>
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className="absolute -left-2 top-0 text-themePurpleText w-6 h-6"
+                />
+                <span class="bg-themeLightBgPurple pl-3 text-themePurpleText text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full  ">
+                  150
+                </span>
+              </button>
+              <button
+                type="button"
+                className="relative rounded-full p-1 text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              >
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">View notifications</span>
+                <span className="bg-red-400 text-white px-2 rounded-full text-[8px]  absolute -top-1 -right-2">
+                  1
+                </span>
+                <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+        <AddressBar />
+        <div className=" relative sm:container">
+          <CircularHomeCarousel images={products} />
+          <div className="bg-white absolute  left-0 w-full sm:container">
+            <div className="flex justify-center items-center -mt-10 mb-8">
+              <div
+                class="button w-40 h-12 shining-element bg-purple-500 rounded-lg cursor-pointer select-none
+    active:translate-y-2  active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841]
+    active:border-b-[0px]
+    transition-all duration-150 [box-shadow:0_10px_0_0_#7e22ce,0_15px_0_0_#1b70f841]
+    border-b-[1px] border-purple-400
+  "
+              >
+                <span class="flex flex-col justify-center items-center h-full text-white font-bold text-base ">
+                  Slash the price
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-between mx-4 sm:mx-0 rounded-lg items-start bg-gradient-to-b from-gray-200 to-white px-4 py-6">
+              <div className="space-y-2 w-2/3">
+                <p className="font-bold text-lg">august expo</p>
+                <p className="text-[10px]">1ST - 31ST AUG</p>
+              </div>
+              <p className="text-xs">
+                exclusive deals on homegrown brands at up to 80% off
+              </p>
+            </div>
+            <div className="">
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <Product />
+              </div>
+              <div className="h-2 w-full  bg-gray-100 shadow-inner"></div>
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <Product />
+              </div>
+              <div className="h-2 w-full  bg-gray-100 shadow-inner"></div>
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <ProductCategory />
+              </div>
+              <div className="h-2 w-full  bg-gray-100 shadow-inner"></div>
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <Product />
+              </div>
+              <div className="h-2 w-full  bg-gray-100 shadow-inner"></div>
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <SaleBanner data={products[0]} />
+              </div>
+              <div className="h-2 w-full  bg-gray-100 shadow-inner"></div>
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <ProductAutoScroll />
+              </div>
+              <div className="h-2 w-full  bg-gray-100 shadow-inner"></div>
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <Product />
+              </div>
+              <div className="h-2 w-full  bg-gray-100 shadow-inner"></div>
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <FavoriteBrandsGrid data={products} />
+              </div>
+              <div className="h-2 w-full  bg-gray-100 shadow-inner"></div>
+              <div className="w-full my-8">
+                <SecondaryHeading />
+                <ProductGrid />
+              </div>
+            </div>
+            <Footer />
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
