@@ -5,6 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css";
 import "swiper/css/effect-cube";
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 
 const inter = Inter({ subsets: ['latin'] })

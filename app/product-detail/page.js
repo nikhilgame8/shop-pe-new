@@ -6,6 +6,9 @@ import SecondaryHeading from "@/components/Heading/SecondaryHeading";
 import Product from "@/components/ProductList/Product";
 import Footer from "@/components/Footer";
 import { RadioGroup } from "@headlessui/react";
+import AddressBar from "@/components/AddressBar";
+import Navbar from "@/components/Navbar";
+import CartSlideModel from "@/components/ModelUI/CartSlideModel";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -68,11 +71,15 @@ function classNames(...classes) {
 const page = () => {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const [viewCart, setViewCart] = useState(false);
 
   return (
     <>
+      <Navbar setViewCart={setViewCart} />
+      <CartSlideModel show={viewCart} setShow={setViewCart} />
       <div className="">
-        <div className="pt-6">
+        <AddressBar />
+        <div className="pt-5">
           <nav aria-label="Breadcrumb">
             <ol role="list" className="flex items-center space-x-2 container">
               {product.breadcrumbs.map((breadcrumb) => (
@@ -357,9 +364,9 @@ const page = () => {
             </div>
           </div>
         </div>
-            <div className="h-2 w-full block sm:hidden  bg-gray-100 shadow-inner container"></div>
+        <div className="h-2 w-full my-8  bg-gray-100 shadow-inner"></div>
 
-        <div className="sm:container w-full my-8">
+        <div className="sm:container mt-4 mb-16">
           <SecondaryHeading />
           <Product />
         </div>

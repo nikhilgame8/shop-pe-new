@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer class="bg-white w-full absolute left-0 border-t border-gray-300">
-      <div class="sm:container w-full p-4 py-6 lg:py-8">
+    <footer class="bg-white w-full border-t border-gray-300">
+      <div class="container w-full py-6 lg:py-8">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
             <a href="https://flowbite.com/" class="flex items-center">

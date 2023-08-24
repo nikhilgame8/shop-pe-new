@@ -192,6 +192,15 @@ const Product = () => {
         <span className="sr-only">next</span>
         <FontAwesomeIcon className="w-6 h-6 text-gray-400" icon={faChevronRight}/>
       </button> */}
+      <div className="mt-6 px-4 sm:hidden">
+            <a
+              href="#"
+              className="block text-sm font-semibold text-themePurpleText hover:text-themeHoverPurple"
+            >
+              Browse all categories
+              <span aria-hidden="true"> &rarr;</span>
+            </a>
+          </div>
     </div>
   );
 }

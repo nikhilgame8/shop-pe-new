@@ -5,13 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/navigation";
 
 const navigation = {
   categories: [
@@ -99,8 +96,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar = () => {
-  const router = useRouter();
+const Navbar = ({setViewCart}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -149,7 +145,7 @@ const Navbar = () => {
                 <Tab.Group as="div" className="mt-2">
                   <div className="border-b border-gray-200">
                     <Tab.List className="-mb-px flex space-x-8 px-4">
-                      {navigation?.categories?.map((category) => (
+                      {navigation.categories.map((category) => (
                         <Tab
                           key={category.name}
                           className={({ selected }) =>
@@ -167,7 +163,7 @@ const Navbar = () => {
                     </Tab.List>
                   </div>
                   <Tab.Panels as={Fragment}>
-                    {navigation?.categories?.map((category) => (
+                    {navigation.categories.map((category) => (
                       <Tab.Panel
                         key={category.name}
                         className="space-y-12 px-4 py-6"
@@ -207,7 +203,7 @@ const Navbar = () => {
                 </Tab.Group>
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {navigation?.pages?.map((page) => (
+                  {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
                       <a
                         href={page.href}
@@ -270,26 +266,16 @@ const Navbar = () => {
           </div>
         </Dialog>
       </Transition.Root>
-      <div className="relative bg-gray-900">
-        {/* Decorative image and overlay */}
-        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-          <img
-            src="https://tailwindui.com/img/ecommerce-images/home-page-01-hero-full-width.jpg"
-            alt=""
-            className="h-full w-full object-cover object-center"
-          />
-        </div>
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gray-900 opacity-50"
-        />
 
+      {/* Hero section */}
+      <div className="relative bg-gray-900">
+        
         {/* Navigation */}
         <header className="relative z-10">
           <nav aria-label="Top">
             {/* Top navigation */}
             <div className="bg-gray-900">
-              <div className="mx-auto flex h-10 max-w-7xl items-center justify-end px-4 sm:px-6 lg:px-8">
+              <div className="flex h-10 container items-center justify-end">
                 {/* Currency selector */}
                 {/* <form>
                   <div>
@@ -335,7 +321,7 @@ const Navbar = () => {
 
             {/* Secondary navigation */}
             <div className="bg-white  backdrop-blur-md backdrop-filter">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="container">
                 <div>
                   <div className="flex h-16 items-center justify-between">
                     {/* Logo (lg+) */}
@@ -357,7 +343,7 @@ const Navbar = () => {
                       {/* Flyout menus */}
                       <Popover.Group className="inset-x-0 bottom-0 px-4">
                         <div className="flex h-full justify-center space-x-8">
-                          {navigation?.categories?.map((category) => (
+                          {navigation.categories.map((category) => (
                             <Popover key={category.name} className="flex">
                               {({ open }) => (
                                 <>
@@ -391,7 +377,7 @@ const Navbar = () => {
                                       />
 
                                       <div className="relative bg-gray-900">
-                                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                                        <div className="container">
                                           <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
                                             {category.featured.map((item) => (
                                               <div
@@ -433,7 +419,7 @@ const Navbar = () => {
                             </Popover>
                           ))}
 
-                          {navigation?.pages?.map((page) => (
+                          {navigation.pages.map((page) => (
                             <a
                               key={page.name}
                               href={page.href}
@@ -522,9 +508,9 @@ const Navbar = () => {
                           </button>
                         </div>
                         <div className="ml-4 flow-root lg:ml-8">
-                          <a
-                            href="#"
-                            className="group -m-2 flex items-center p-2"
+                          <div
+                          onClick={()=>setViewCart(true)}
+                            className="group -m-2 flex items-center p-2 cursor-pointer"
                           >
                             <ShoppingBagIcon
                               className="h-6 w-6 flex-shrink-0 text-gray-900"
@@ -536,7 +522,7 @@ const Navbar = () => {
                             <span className="sr-only">
                               items in cart, view bag
                             </span>
-                          </a>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -546,23 +532,6 @@ const Navbar = () => {
             </div>
           </nav>
         </header>
-
-        <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-32 text-center sm:py-64 lg:px-0">
-          <h1 className="text-4xl font-bold tracking-tight text-white lg:text-6xl">
-            New arrivals are here
-          </h1>
-          <p className="mt-4 text-xl text-white">
-            The new arrivals have, well, newly arrived. Check out the latest
-            options from our summer small-batch release while they're still in
-            stock.
-          </p>
-          <a
-            href="#"
-            className="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100"
-          >
-            Shop New Arrivals
-          </a>
-        </div>
       </div>
     </div>
   );

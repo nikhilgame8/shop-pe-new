@@ -1,160 +1,142 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+'use client'
+import React, { useState } from "react";
 
-const products = [
-  {
-    id: 1,
-    name: 'Throwback Hip Bag',
-    href: '#',
-    color: 'Salmon',
-    price: '$90.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-    imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-  },
-  {
-    id: 2,
-    name: 'Medium Stuff Satchel',
-    href: '#',
-    color: 'Blue',
-    price: '$32.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    imageAlt:
-      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-  },
-  // More products...
-]
-
-const CartSlideModel = () => {
-  const [open, setOpen] = useState(true)
-
-  return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-in-out duration-500"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in-out duration-500"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </Transition.Child>
-
-        <div className="fixed inset-0 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-              <Transition.Child
-                as={Fragment}
-                enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom="translate-x-full"
-                enterTo="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
-                leaveFrom="translate-x-0"
-                leaveTo="translate-x-full"
-              >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                    <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                      <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
-                        <div className="ml-3 flex h-7 items-center">
-                          <button
-                            type="button"
-                            className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
-                          >
-                            <span className="absolute -inset-0.5" />
-                            <span className="sr-only">Close panel</span>
-                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="mt-8">
-                        <div className="flow-root">
-                          <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {products.map((product) => (
-                              <li key={product.id} className="flex py-6">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
-                                    className="h-full w-full object-cover object-center"
-                                  />
-                                </div>
-
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>
-                                        <a href={product.href}>{product.name}</a>
-                                      </h3>
-                                      <p className="ml-4">{product.price}</p>
+const CartSlideModel = ({show, setShow}) => {
+    return (
+        <>
+            <div>
+                {/* <div className="flex items-center justify-center py-8">
+                    <button onClick={() => setShow(!show)} className="py-2 px-10 rounded bg-indigo-600 hover:bg-indigo-700 text-white">
+                        Open Modal
+                    </button>
+                </div> */}
+                {show && (
+                    <div className="w-full h-full bg-black bg-opacity-90 z-20 top-0 overflow-y-auto overflow-x-hidden fixed sticky-0" id="chec-div">
+                        <div className="w-full absolute z-50 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="checkout">
+                            <div className="flex md:flex-row flex-col justify-end" id="cart">
+                                <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-white overflow-y-auto overflow-x-hidden h-screen" id="scroll">
+                                    <div className="flex items-center text-gray-500 hover:text-gray-600 cursor-pointer" onClick={() => setShow(!show)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <polyline points="15 6 9 12 15 18" />
+                                        </svg>
+                                        <p className="text-sm pl-2 leading-none">Back</p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                                  </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {product.quantity}</p>
-
-                                    <div className="flex">
-                                      <button
-                                        type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
-                                      >
-                                        Remove
-                                      </button>
+                                    <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Bag</p>
+                                    <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
+                                        <div className="w-1/4">
+                                            <img src="https://cdn.tuk.dev/assets/templates/e-commerce-kit/bestSeller3.png" alt className="w-full h-full object-center object-cover" />
+                                        </div>
+                                        <div className="md:pl-3 md:w-3/4">
+                                            <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">RF293</p>
+                                            <div className="flex items-center justify-between w-full pt-1">
+                                                <p className="text-base font-black leading-none text-gray-800">North wolf bag</p>
+                                                <select className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
+                                                    <option>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                </select>
+                                            </div>
+                                            <p className="text-xs leading-3 text-gray-600 pt-2">Height: 10 inches</p>
+                                            <p className="text-xs leading-3 text-gray-600 py-4">Color: Black</p>
+                                            <p className="w-96 text-xs leading-3 text-gray-600">Composition: 100% calf leather</p>
+                                            <div className="flex items-center justify-between pt-5 pr-6">
+                                                <div className="flex itemms-center">
+                                                    <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">Add to favorites</p>
+                                                    <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                                </div>
+                                                <p className="text-base font-black leading-none text-gray-800">$9,000</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                  </div>
+                                    <div className="md:flex items-center py-8 border-t border-gray-200">
+                                        <div className="w-1/4">
+                                            <img src="https://cdn.tuk.dev/assets/templates/e-commerce-kit/bestSeller2.png" alt className="w-full h-full object-center object-cover" />
+                                        </div>
+                                        <div className="md:pl-3 md:w-3/4 w-full">
+                                            <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">RF293</p>
+                                            <div className="flex items-center justify-between w-full pt-1">
+                                                <p className="text-base font-black leading-none text-gray-800">Luxe Signature Ring</p>
+                                                <select className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
+                                                    <option>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                </select>
+                                            </div>
+                                            <p className="text-xs leading-3 text-gray-600 pt-2">Height: 10 inches</p>
+                                            <p className="text-xs leading-3 text-gray-600 py-4">Color: Black</p>
+                                            <p className="w-96 text-xs leading-3 text-gray-600">Composition: 100% calf leather</p>
+                                            <div className="flex items-center justify-between pt-5 pr-6">
+                                                <div className="flex itemms-center">
+                                                    <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">Add to favorites</p>
+                                                    <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                                </div>
+                                                <p className="text-base font-black leading-none text-gray-800">$9,000</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="md:flex items-center py-8 border-t border-b border-gray-200">
+                                        <div className="h-full w-1/4">
+                                            <img src="https://cdn.tuk.dev/assets/templates/e-commerce-kit/bestSeller1.png" alt className="w-full h-full object-center object-cover" />
+                                        </div>
+                                        <div className="md:pl-3 md:w-3/4 w-full">
+                                            <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">RF293</p>
+                                            <div className="flex items-center justify-between w-full pt-1">
+                                                <p className="text-base font-black leading-none text-gray-800">Luxe Signature Shoes</p>
+                                                <select className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
+                                                    <option>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                </select>
+                                            </div>
+                                            <p className="text-xs leading-3 text-gray-600 pt-2">Height: 10 inches</p>
+                                            <p className="text-xs leading-3 text-gray-600 py-4">Color: Black</p>
+                                            <p className="w-96 text-xs leading-3 text-gray-600">Composition: 100% calf leather</p>
+                                            <div className="flex items-center justify-between pt-5 pr-6">
+                                                <div className="flex itemms-center">
+                                                    <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">Add to favorites</p>
+                                                    <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                                </div>
+                                                <p className="text-base font-black leading-none text-gray-800">$9,000</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </li>
-                            ))}
-                          </ul>
+                                <div className="md:w-1/3 xl:w-1/4 w-full bg-themeLightBgPurple h-full">
+                                    <div className="flex flex-col md:h-screen px-14 py-20 justify-between overflow-y-auto">
+                                        <div>
+                                            <p className="text-4xl font-black leading-9 text-gray-800">Summary</p>
+                                            <div className="flex items-center justify-between pt-16">
+                                                <p className="text-base leading-none text-gray-800">Subtotal</p>
+                                                <p className="text-base leading-none text-gray-800">$9,000</p>
+                                            </div>
+                                            <div className="flex items-center justify-between pt-5">
+                                                <p className="text-base leading-none text-gray-800">Shipping</p>
+                                                <p className="text-base leading-none text-gray-800">$30</p>
+                                            </div>
+                                            <div className="flex items-center justify-between pt-5">
+                                                <p className="text-base leading-none text-gray-800">Tax</p>
+                                                <p className="text-base leading-none text-gray-800">$35</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
+                                                <p className="text-2xl leading-normal text-gray-800">Total</p>
+                                                <p className="text-2xl font-bold leading-normal text-right text-gray-800">$10,240</p>
+                                            </div>
+                                            <button onClick={() => setShow(!show)} className="text-base leading-none w-full py-5 bg-themePurpleText border-themePurpleText border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-themePurpleText text-white">
+                                                Checkout
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-
-                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                      <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p>Subtotal</p>
-                        <p>$262.00</p>
-                      </div>
-                      <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                      <div className="mt-6">
-                        <a
-                          href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
-                          Checkout
-                        </a>
-                      </div>
-                      <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                        <p>
-                          or
-                          <button
-                            type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
-                          >
-                            Continue Shopping
-                            <span aria-hidden="true"> &rarr;</span>
-                          </button>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
+                )}
             </div>
-          </div>
-        </div>
-      </Dialog>
-    </Transition.Root>
-  )
+        </>
+    );
 }
 
 export default CartSlideModel;
