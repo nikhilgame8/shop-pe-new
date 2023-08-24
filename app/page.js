@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ProductCategory from "@/components/ProductList/ProductCategory";
 import AddressBar from "@/components/AddressBar";
 import SecondaryHeading from "@/components/Heading/SecondaryHeading";
